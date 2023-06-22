@@ -20,6 +20,18 @@
     height: 60px;
 }
 
+.header-inner .header-title {
+    display: flex;
+    gap: 10px;
+}
+
+.header-inner .header-title h1 {
+    color: #fff;
+    margin: 7px 0;
+    font-size: 30px;
+    font-weight: 300;
+}
+
 .header-inner button {
     width: 200px;
     height: 40px;
@@ -34,14 +46,27 @@
 
 @media (max-width: 540px){
 
+    .header-main {
+        height: 65px;
+    }
+
     .header-inner {
         width: 95%;
     }
 
     .header-inner button {
-        width: 150px;
-        height: 40px;
+        width: 120px;
+        height: 35px;
         font-size: 12px;
+    }
+
+    .header-inner img {
+        width: 50px;
+        height: 50px;
+    }
+
+    .header-inner .header-title h1 {
+        font-size: 25px;
     }
 
 }
