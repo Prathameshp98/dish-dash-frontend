@@ -1,5 +1,7 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { gql, useQuery } from '@apollo/client'
+
+import Spinner from './spinner';
 
 import '../Assests/CSS/card-body.css';
 
@@ -24,19 +26,26 @@ const GET_DISHES = gql`
 
 const CardBody: React.FC = () => {
 
+  const [timer, setTimer] = useState(false)
+
   const { loading, error, data } = useQuery(GET_DISHES)
 
-  if (loading) return <p>Loading...</p>;
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setTimer(true)
+    }, 1000);
+    return () => clearTimeout(timer);
+  })
+
+  if (loading || !timer) return <Spinner />;
   if (error) return <p>Something Went Wrong</p>;
-
-
 
   return (
     <>
-      {!loading && !error && 
+      {!loading && !error && timer && 
         <div className="cards-main">
           {data.dishes.map((dish: any) => (
-            <div className="card-outer">
+            <div id={dish.id} className="card-outer">
                 <div className="card-inner">
                     <img src={dish.dishImage} alt="" />
                     {dish.type === 'Non Veg' &&
@@ -51,7 +60,8 @@ const CardBody: React.FC = () => {
                     <div className='info-body'>
                       <h2>{dish.name}</h2>
                       <div className='info-body-inner'>
-
+                        <p className='instruction-heading'>Instructions</p>
+                        <p className='instructions' dangerouslySetInnerHTML={{__html: dish.instructions.slice(0,85) + '...'}} />
                       </div>
                     </div>
                 </div>
