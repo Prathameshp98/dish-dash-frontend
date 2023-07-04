@@ -1,0 +1,15 @@
+
+
+.body-main {
+    width: 80%;
+    margin: 0 10%;
+}
+
+@media (max-width: 540px){
+
+    .body-main {
+        width: 95%;
+        margin: 0 2.5%;
+    }
+
+}
